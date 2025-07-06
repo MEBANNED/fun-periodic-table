@@ -1,41 +1,71 @@
-  :root{
-    --solid:#90be6d;--liquid:#8ecae6;--gas:#ffb703;--unknown:#adb5bd;--border:#023047;
-  }
-
-  body{font-family:sans-serif;background:#f1f7ff;text-align:center;padding:2rem 1rem}
-  h1{font-size:2rem;margin-bottom:1.4rem}
-
-  #table{display:grid;grid-template-columns:repeat(18,70px);gap:6px;justify-content:center}
-
-  .element{
-    border:2px solid var(--border);border-radius:8px;padding:1rem 0;font-weight:700;
-    font-size:.95rem;color:#fff;cursor:pointer;transition:.15s;
-  }
-  .element:hover{transform:translateY(-3px);filter:brightness(1.1)}
-
-  #popup{
-    position:fixed;top:50%;left:50%;translate:-50% -50%;
-    background:#fff;border:3px solid var(--border);border-radius:16px;
-    padding:1.4rem;width:min(90%,320px);box-shadow:0 12px 24px rgba(0,0,0,.25);z-index:20
-  }
-  .hidden{display:none}
-  #close{
-    position:absolute;top:6px;right:10px;font-size:1.4rem;font-weight:700;
-    cursor:pointer;color:var(--border)
-  }
-
-  /* ✨ darken page when popup is visible */
-  body:has(#popup:not(.hidden))::before{
-    content:"";position:fixed;inset:0;background:rgba(0,0,0,.35);
-    backdrop-filter:blur(2px);z-index:15
-  }
-#mode-buttons{
-  margin-bottom:0.6rem;
+/* ---------- colour theme -------------------------------------------- */
+:root{
+  --solid:#90be6d;
+  --liquid:#8ecae6;
+  --gas:#ffd93b;
+  --unknown:#adb5bd;
+  --border:#023047;
 }
+
+body{
+  font-family:system-ui, sans-serif;
+  background:#f1f7ff;
+  text-align:center;
+  padding:2rem 1rem;
+}
+h1{font-size:2rem;margin-bottom:1.4rem}
+
+#table{
+  display:grid;
+  grid-template-columns:repeat(18,70px);
+  gap:6px;
+  justify-content:center;
+}
+
+.element{
+  border:2px solid var(--border);
+  border-radius:8px;
+  padding:1rem 0;
+  font-weight:700;
+  font-size:.95rem;
+  color:#fff;
+  cursor:pointer;
+  transition:.15s;
+}
+.element:hover{transform:translateY(-3px);filter:brightness(1.1)}
+
+/* ---------- popup --------------------------------------------------- */
+#popup{
+  position:fixed;top:50%;left:50%;translate:-50% -50%;
+  background:#fff;
+  border:3px solid var(--border);
+  border-radius:16px;
+  padding:1.4rem;
+  width:min(90%,320px);
+  box-shadow:0 12px 24px rgba(0,0,0,.25);
+  z-index:20;
+}
+.hidden{display:none}
+#close{
+  position:absolute;top:6px;right:10px;
+  font-size:1.4rem;font-weight:700;
+  cursor:pointer;color:var(--border);
+}
+
+/* ✨ darken page when popup is visible */
+body:has(#popup:not(.hidden))::before{
+  content:\"\";position:fixed;inset:0;
+  background:rgba(0,0,0,.35);
+  backdrop-filter:blur(2px);
+  z-index:15;
+}
+
+/* ---------- Kid / Adult buttons in popup --------------------------- */
+#mode-buttons{margin-bottom:0.6rem}
 #mode-buttons button{
-  margin:0 .3rem;
+  margin:0 .25rem;
   padding:.35rem .8rem;
-  border:1px solid #023047;
+  border:1px solid var(--border);
   border-radius:6px;
   cursor:pointer;
   background:#fff;
@@ -45,3 +75,4 @@
   color:#023047;
   font-weight:700;
 }
+
