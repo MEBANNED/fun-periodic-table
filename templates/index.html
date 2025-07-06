@@ -9,6 +9,23 @@
 <body>
   <h1>🧪 Fun Interactive Periodic Table 🧪</h1>
 
+  <div id="table" class="grid"></div>
+
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span id="close" class="close-button">×</span>
+      <h2 id="symbol"></h2>
+      <h3 id="name"></h3>
+      <p id="funfact"></p>
+      <div class="mode-switch">
+        <button id="kidMode" class="mode-button active">Kid Mode</button>
+        <button id="adultMode" class="mode-button">Adult Mode</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+
   <!-- 🔀 Mode toggle -->
   <button id="toggleMode">Switch to Adult Mode</button>
 
