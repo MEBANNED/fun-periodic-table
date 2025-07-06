@@ -2,51 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fun Interactive Periodic Table</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-</head>
-  <title>Fun Interactive Periodic Table</title>
-  <!-- Flask will serve this file from /static/style.css -->
+  <title>🧪 Fun Interactive Periodic Table 🧪</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <h1>🧪 Fun Interactive Periodic Table 🧪</h1>
 
-  <div id="table" class="grid"></div>
+  <button id="toggle-mode">Switch to Adult Mode</button>
 
-  <div id="popup" class="popup hidden">
-    <div class="popup-content">
-      <span id="close" class="close-button">×</span>
-      <h2 id="symbol"></h2>
-      <h3 id="name"></h3>
-      <p id="funfact"></p>
-      <div class="mode-switch">
-        <button id="kidMode" class="mode-button active">Kid Mode</button>
-        <button id="adultMode" class="mode-button">Adult Mode</button>
-      </div>
+  <div id="periodic-table"></div>
+
+  <div id="info-popup" style="display:none;">
+    <div id="popup-content">
+      <button id="close-popup">X</button>
+      <h2 id="element-name">Element</h2>
+      <p id="element-fact">Fact goes here</p>
+      <button onclick="toggleMode()">Switch Mode</button>
     </div>
   </div>
-</body>
 
-
-  <!-- 🔀 Mode toggle -->
-  <button id="toggleMode">Switch to Adult Mode</button>
-
-  <!-- Element grid -->
-  <div id="table"></div>
-
-  <!-- Popup card -->
-  <div id="popup" class="hidden" role="dialog" aria-modal="true">
-    <span id="close" aria-label="Close" tabindex="0">×</span>
-    <h2 id="symbol"></h2>
-    <p id="name"></p>
-    <p id="funfact"></p>
-  </div>
-
-  <!-- Main JS -->
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
-
