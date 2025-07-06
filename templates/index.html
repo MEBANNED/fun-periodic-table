@@ -3,19 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fun Interactive Periodic Table</title>
+  <title>🧪 Periodic Table 🧪</title>
 
-  <!-- Flask expands these to /static/... -->
+  <!-- Flask expands to /static/... -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
-  <h1>🧪 Fun Interactive Periodic Table 🧪</h1>
+  <h1>🧪 Periodic Table 🧪</h1>
 
-  <!-- global mode switch -->
-  <button id="toggle-mode">Switch to Adult Mode</button>
-
-  <!-- periodic-table grid (populated by script.js) -->
+  <!-- grid is injected by script.js -->
   <div id="periodic-table"></div>
 
   <!-- popup modal -->
@@ -23,14 +20,13 @@
     <div id="popup-content">
       <button id="close-popup">×</button>
 
-      <!-- Kid / Adult buttons inside popup -->
       <div class="mode-switch">
-        <button id="kidMode"  class="active">Kid Facts</button>
-        <button id="adultMode">Adult Data</button>
+        <button id="specsBtn" class="active">Atomic Specs</button>
+        <button id="refBtn">Quick Reference</button>
       </div>
 
       <h2 id="element-name">H</h2>
-      <p id="element-fact">Fun fact goes here…</p>
+      <p  id="element-fact">Fact goes here…</p>
     </div>
   </div>
 </body>
