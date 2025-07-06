@@ -1,6 +1,7 @@
 /**
  * Full dataset for Atomic Specs mode (118 elements)
  * Each element has: symbol, name, atomic number, atomic mass, row, column, and state.
+ * (Currently includes H – Kr to avoid syntax error; add the rest below the placeholder comment.)
  */
 
 const ELEMENTS_SPECS = [
@@ -44,5 +45,7 @@ const ELEMENTS_SPECS = [
   { sym: "Br", name: "Bromine",    num: 35, mass: 79.904,  row: 4, col: 17, state: "liquid" },
   { sym: "Kr", name: "Krypton",    num: 36, mass: 83.798,  row: 4, col: 18, state: "gas" }
 
-  // CONTINUATION TO BE ADDED: Ag (47) to Og (118)
+  // TODO: Add elements 37 (Rb) through 118 (Og) following the same format
 ];
+
+// No syntax errors now — you can extend ELEMENTS_SPECS below this comment.
