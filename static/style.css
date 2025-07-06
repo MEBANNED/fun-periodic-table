@@ -1,78 +1,26 @@
-/* ---------- colour theme -------------------------------------------- */
-:root{
-  --solid:#90be6d;
-  --liquid:#8ecae6;
-  --gas:#ffd93b;
-  --unknown:#adb5bd;
-  --border:#023047;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🧪 Fun Interactive Periodic Table 🧪</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>🧪 Fun Interactive Periodic Table 🧪</h1>
 
-body{
-  font-family:system-ui, sans-serif;
-  background:#f1f7ff;
-  text-align:center;
-  padding:2rem 1rem;
-}
-h1{font-size:2rem;margin-bottom:1.4rem}
+  <button id="toggle-mode">Switch to Adult Mode</button>
 
-#table{
-  display:grid;
-  grid-template-columns:repeat(18,70px);
-  gap:6px;
-  justify-content:center;
-}
+  <div id="periodic-table"></div>
 
-.element{
-  border:2px solid var(--border);
-  border-radius:8px;
-  padding:1rem 0;
-  font-weight:700;
-  font-size:.95rem;
-  color:#fff;
-  cursor:pointer;
-  transition:.15s;
-}
-.element:hover{transform:translateY(-3px);filter:brightness(1.1)}
+  <div id="info-popup" style="display:none;">
+    <div id="popup-content">
+      <button id="close-popup">X</button>
+      <h2 id="element-name">Element</h2>
+      <p id="element-fact">Fact goes here</p>
+      <button onclick="toggleMode()">Switch Mode</button>
+    </div>
+  </div>
 
-/* ---------- popup --------------------------------------------------- */
-#popup{
-  position:fixed;top:50%;left:50%;translate:-50% -50%;
-  background:#fff;
-  border:3px solid var(--border);
-  border-radius:16px;
-  padding:1.4rem;
-  width:min(90%,320px);
-  box-shadow:0 12px 24px rgba(0,0,0,.25);
-  z-index:20;
-}
-.hidden{display:none}
-#close{
-  position:absolute;top:6px;right:10px;
-  font-size:1.4rem;font-weight:700;
-  cursor:pointer;color:var(--border);
-}
-
-/* ✨ darken page when popup is visible */
-body:has(#popup:not(.hidden))::before{
-  content:\"\";position:fixed;inset:0;
-  background:rgba(0,0,0,.35);
-  backdrop-filter:blur(2px);
-  z-index:15;
-}
-
-/* ---------- Kid / Adult buttons in popup --------------------------- */
-#mode-buttons{margin-bottom:0.6rem}
-#mode-buttons button{
-  margin:0 .25rem;
-  padding:.35rem .8rem;
-  border:1px solid var(--border);
-  border-radius:6px;
-  cursor:pointer;
-  background:#fff;
-}
-#mode-buttons button.active{
-  background:#ffd93b;
-  color:#023047;
-  font-weight:700;
-}
-
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
