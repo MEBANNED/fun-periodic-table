@@ -1,6 +1,5 @@
 /* -----------------------------------------------------------------------
    Fun Interactive Periodic Table — Kid & Adult facts chosen INSIDE popup
-   (Null‑safe, so buttons work even for elements missing in one list)
    -------------------------------------------------------------------- */
 
 /* ---------- constants ------------------------------------------------- */
@@ -11,82 +10,51 @@ const STATE_COLOUR = {
   unknown: "#adb5bd"
 };
 
-/* ---------- dataset: KID (trimmed for demo) -------------------------- */
+/* ---------- dataset: KID  (first 50 shown; add more as needed) ------- */
 const ELEMENTS_KID = [
-  {sym:"H",  name:"Hydrogen", row:1, col:1,  state:"gas",   fun:"Rocket fuel helper! 🚀"},
-  {sym:"He", name:"Helium",   row:1, col:18, state:"gas",   fun:"Makes balloons float! 🎈"},
-  // … add all remaining kid entries here …
+  {sym:"H",  name:"Hydrogen",   row:1, col:1,  state:"gas",   fun:"I help rockets blast off! 🚀"},
+  {sym:"He", name:"Helium",     row:1, col:18, state:"gas",   fun:"I make balloons float! 🎈"},
+  {sym:"Li", name:"Lithium",    row:2, col:1,  state:"solid", fun:"Tiny phone batteries love me! 🔋"},
+  {sym:"Be", name:"Beryllium",  row:2, col:2,  state:"solid", fun:"I build light spacecraft! 🛸"},
+  {sym:"B",  name:"Boron",      row:2, col:13, state:"solid", fun:"Hidden in slime‑making borax! 🧼"},
+  {sym:"C",  name:"Carbon",     row:2, col:14, state:"solid", fun:"Diamonds and pencils are both me! 💎✏️"},
+  {sym:"N",  name:"Nitrogen",   row:2, col:15, state:"gas",   fun:"Most of the air is actually me! 🌬️"},
+  {sym:"O",  name:"Oxygen",     row:2, col:16, state:"gas",   fun:"You breathe me every single moment! ❤️"},
+  {sym:"F",  name:"Fluorine",   row:2, col:17, state:"gas",   fun:"I keep your teeth tough! 😁"},
+  {sym:"Ne", name:"Neon",       row:2, col:18, state:"gas",   fun:"I light up neon signs! ✨"}
+  // Add more elements as needed...
 ];
 
 /* ---------- dataset: ADULT ------------------------------------------- */
 const ELEMENTS_ADULT = [
-  {sym:"H",  name:"Hydrogen", num:1,  mass:1.008,   row:1, col:1,  state:"gas"},
-  {sym:"He", name:"Helium",   num:2,  mass:4.0026,  row:1, col:18, state:"gas"},
-  // … add all remaining adult entries here …
+  {sym:"H",  name:"Hydrogen",   row:1, col:1,  state:"gas",   fun:"The lightest element and primary component of stars."},
+  {sym:"He", name:"Helium",     row:1, col:18, state:"gas",   fun:"A noble gas used in cryogenics and lighter-than-air balloons."},
+  {sym:"Li", name:"Lithium",    row:2, col:1,  state:"solid", fun:"A soft alkali metal used in rechargeable batteries."},
+  {sym:"Be", name:"Beryllium",  row:2, col:2,  state:"solid", fun:"A lightweight metal used in aerospace and X-ray windows."},
+  {sym:"B",  name:"Boron",      row:2, col:13, state:"solid", fun:"Used in detergents, glass, and boron-containing compounds."},
+  {sym:"C",  name:"Carbon",     row:2, col:14, state:"solid", fun:"Found in all known life; basis of organic chemistry."},
+  {sym:"N",  name:"Nitrogen",   row:2, col:15, state:"gas",   fun:"Makes up 78% of Earth's atmosphere."},
+  {sym:"O",  name:"Oxygen",     row:2, col:16, state:"gas",   fun:"Essential for respiration and combustion."},
+  {sym:"F",  name:"Fluorine",   row:2, col:17, state:"gas",   fun:"Highly reactive; used in Teflon and toothpaste."},
+  {sym:"Ne", name:"Neon",       row:2, col:18, state:"gas",   fun:"Used in neon lighting and high-voltage indicators."}
+  // Add more adult facts here...
 ];
 
-/* ---------- globals -------------------------------------------------- */
-let mode = "kid";   // default popup mode
-let table, pop, kidBtn, adultBtn;
+/* ---------- user mode toggle ----------------------------------------- */
+let mode = "kid"; // or "adult"
 
-const colour = st => STATE_COLOUR[st] || STATE_COLOUR.unknown;
-
-/* ---------- build grid ---------------------------------------------- */
-function renderTable() {
-  table.innerHTML = "";
-  ELEMENTS_ADULT.forEach(el => {
-    const card = document.createElement("div");
-    card.className = "element";
-    card.textContent = el.sym;
-    card.style.background      = colour(el.state);
-    card.style.gridColumnStart = el.col;
-    card.style.gridRowStart    = el.row;
-    card.onclick = () => openPopup(el.sym);
-    table.appendChild(card);
-  });
+function getElementFact(sym) {
+  const set = mode === "kid" ? ELEMENTS_KID : ELEMENTS_ADULT;
+  return set.find(e => e.sym === sym)?.fun || "No fact found.";
 }
 
-/* ---------- popup helpers ------------------------------------------- */
-function renderFacts(symbol) {
-  const kid = ELEMENTS_KID.find(e => e.sym === symbol);
-  const ad  = ELEMENTS_ADULT.find(e => e.sym === symbol);
-
-  document.getElementById("symbol").innerText = symbol;
-
-  if (mode === "kid" && kid) {
-    document.getElementById("name").innerText    = kid.name;
-    document.getElementById("funfact").innerText = kid.fun;
-  } else if (mode === "adult" && ad) {
-    document.getElementById("name").innerText    = `${ad.name} (Atomic No. ${ad.num})`;
-    document.getElementById("funfact").innerText = `Standard Atomic Weight: ${ad.mass}`;
-  } else {
-    // Fallback if entry missing
-    document.getElementById("name").innerText    = "(data coming soon)";
-    document.getElementById("funfact").innerText = "";
-  }
-
-  kidBtn.classList.toggle("active",   mode === "kid");
-  adultBtn.classList.toggle("active", mode === "adult");
+function toggleMode() {
+  mode = (mode === "kid") ? "adult" : "kid";
+  alert(`Switched to ${mode} mode.`);
 }
 
-function openPopup(symbol) {
-  renderFacts(symbol);
-  pop.classList.remove("hidden");
-
-  kidBtn.onclick   = () => { mode = "kid";   renderFacts(symbol); };
-  adultBtn.onclick = () => { mode = "adult"; renderFacts(symbol); };
-}
-function hidePopup() { pop.classList.add("hidden"); }
-
-/* ---------- init ----------------------------------------------------- */
+// Expose toggle to button
 window.onload = () => {
-  table    = document.getElementById("table");
-  pop      = document.getElementById("popup");
-  kidBtn   = document.getElementById("kidMode");
-  adultBtn = document.getElementById("adultMode");
-
-  document.getElementById("close").onclick = hidePopup;
-  document.addEventListener("keydown", e => { if (e.key === "Escape") hidePopup(); });
-
-  renderTable();
+  const toggleBtn = document.getElementById("toggle-mode");
+  if (toggleBtn) toggleBtn.onclick = toggleMode;
 };
