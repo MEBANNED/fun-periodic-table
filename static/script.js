@@ -1,110 +1,90 @@
 /* -----------------------------------------------------------------------
-   Fun Interactive Periodic Table — Kid & Adult modes inside popup
-   Fully interactive: builds grid, opens popup, switches facts
+   Two in-popup views:
+     ① Atomic Specs  (default) – atomic number + standard mass
+     ② Quick Reference          – short description
    -------------------------------------------------------------------- */
 
-/* ---------- colour map ------------------------------------------------ */
-const STATE_COLOUR = {
-  solid:   "#90be6d",
-  liquid:  "#8ecae6",
-  gas:     "#ffd93b",
-  unknown: "#adb5bd"
-};
+/* colour by state */
+const STATE_COLOUR = { solid:"#90be6d", liquid:"#8ecae6", gas:"#ffd93b", unknown:"#adb5bd" };
 
-/* ---------- minimal demo data (first 10 elements) -------------------- */
-const ELEMENTS_KID = [
-  {sym:"H",  name:"Hydrogen",   row:1, col:1,  state:"gas",   fun:"I help rockets blast off! 🚀"},
-  {sym:"He", name:"Helium",     row:1, col:18, state:"gas",   fun:"I make balloons float! 🎈"},
-  {sym:"Li", name:"Lithium",    row:2, col:1,  state:"solid", fun:"Tiny phone batteries love me! 🔋"},
-  {sym:"Be", name:"Beryllium",  row:2, col:2,  state:"solid", fun:"I build light spacecraft! 🛸"},
-  {sym:"B",  name:"Boron",      row:2, col:13, state:"solid", fun:"Hidden in slime‑making borax! 🧼"},
-  {sym:"C",  name:"Carbon",     row:2, col:14, state:"solid", fun:"Diamonds & pencils are both me! 💎✏️"},
-  {sym:"N",  name:"Nitrogen",   row:2, col:15, state:"gas",   fun:"78 % of the air is me! 🌬️"},
-  {sym:"O",  name:"Oxygen",     row:2, col:16, state:"gas",   fun:"You breathe me every moment! ❤️"},
-  {sym:"F",  name:"Fluorine",   row:2, col:17, state:"gas",   fun:"I guard your teeth! 😁"},
-  {sym:"Ne", name:"Neon",       row:2, col:18, state:"gas",   fun:"I glow in neon signs! ✨"}
+/* ---- data (first 20 shown; extend to Og) ---- */
+const ELEMENTS = [
+  {sym:"H",  name:"Hydrogen",  num:1,  mass:1.008,   state:"gas",   row:1, col:1,  ref:"Lightest element; fuels stars."},
+  {sym:"He", name:"Helium",    num:2,  mass:4.0026,  state:"gas",   row:1, col:18, ref:"Inert gas for cryogenics & balloons."},
+  {sym:"Li", name:"Lithium",   num:3,  mass:6.94,    state:"solid", row:2, col:1,  ref:"Soft metal in rechargeable batteries."},
+  {sym:"Be", name:"Beryllium", num:4,  mass:9.0122,  state:"solid", row:2, col:2,  ref:"Light metal for aerospace parts."},
+  {sym:"B",  name:"Boron",     num:5,  mass:10.81,   state:"solid", row:2, col:13, ref:"Used in glass and borax detergents."},
+  {sym:"C",  name:"Carbon",    num:6,  mass:12.011,  state:"solid", row:2, col:14, ref:"Basis of organic life; diamond/graphite."},
+  {sym:"N",  name:"Nitrogen",  num:7,  mass:14.007,  state:"gas",   row:2, col:15, ref:"78 % of Earth’s atmosphere."},
+  {sym:"O",  name:"Oxygen",    num:8,  mass:15.999,  state:"gas",   row:2, col:16, ref:"Essential for respiration & combustion."},
+  {sym:"F",  name:"Fluorine",  num:9,  mass:18.998,  state:"gas",   row:2, col:17, ref:"Highly reactive; in Teflon & toothpaste."},
+  {sym:"Ne", name:"Neon",      num:10, mass:20.180,  state:"gas",   row:2, col:18, ref:"Bright orange-red in neon lights."},
+  {sym:"Na", name:"Sodium",    num:11, mass:22.990,  state:"solid", row:3, col:1,  ref:"Forms common salt with chlorine."},
+  {sym:"Mg", name:"Magnesium", num:12, mass:24.305,  state:"solid", row:3, col:2,  ref:"Burns bright white; light alloys."},
+  {sym:"Al", name:"Aluminium", num:13, mass:26.982,  state:"solid", row:3, col:13, ref:"Light metal for cans and aircraft."},
+  {sym:"Si", name:"Silicon",   num:14, mass:28.085,  state:"solid", row:3, col:14, ref:"Semiconductor in all computer chips."},
+  {sym:"P",  name:"Phosphorus",num:15, mass:30.974,  state:"solid", row:3, col:15, ref:"Vital for DNA & fertilizers."},
+  {sym:"S",  name:"Sulfur",    num:16, mass:32.06,   state:"solid", row:3, col:16, ref:"Yellow mineral; smells like rotten eggs."},
+  {sym:"Cl", name:"Chlorine",  num:17, mass:35.45,   state:"gas",   row:3, col:17, ref:"Disinfects water; part of table salt."},
+  {sym:"Ar", name:"Argon",     num:18, mass:39.948,  state:"gas",   row:3, col:18, ref:"Inert gas used in welding & bulbs."},
+  {sym:"K",  name:"Potassium", num:19, mass:39.098,  state:"solid", row:4, col:1,  ref:"Essential nutrient; bursts in water."},
+  {sym:"Ca", name:"Calcium",   num:20, mass:40.078,  state:"solid", row:4, col:2,  ref:"Builds bones and teeth."}
+  /* ➜ continue rows 5-7 & lan/act to Og (118) */
 ];
 
-const ELEMENTS_ADULT = [
-  {sym:"H",  name:"Hydrogen",   num:1,  mass:1.008,   row:1, col:1,  state:"gas"},
-  {sym:"He", name:"Helium",     num:2,  mass:4.0026,  row:1, col:18, state:"gas"},
-  {sym:"Li", name:"Lithium",    num:3,  mass:6.94,    row:2, col:1,  state:"solid"},
-  {sym:"Be", name:"Beryllium",  num:4,  mass:9.0122,  row:2, col:2,  state:"solid"},
-  {sym:"B",  name:"Boron",      num:5,  mass:10.81,   row:2, col:13, state:"solid"},
-  {sym:"C",  name:"Carbon",     num:6,  mass:12.011,  row:2, col:14, state:"solid"},
-  {sym:"N",  name:"Nitrogen",   num:7,  mass:14.007,  row:2, col:15, state:"gas"},
-  {sym:"O",  name:"Oxygen",     num:8,  mass:15.999,  row:2, col:16, state:"gas"},
-  {sym:"F",  name:"Fluorine",   num:9,  mass:18.998,  row:2, col:17, state:"gas"},
-  {sym:"Ne", name:"Neon",       num:10, mass:20.180,  row:2, col:18, state:"gas"}
-];
+/* ---------- globals & helpers ---------------------------------------- */
+let currentView = "specs";  // "specs" or "reference"
+const colour = s => STATE_COLOUR[s]||STATE_COLOUR.unknown;
 
-/* ---------- globals -------------------------------------------------- */
-let mode = "kid";      // current fact set
-let table, popup, nameEl, factEl, symbolEl, kidBtn, adultBtn;
+let grid, popup, symbolBox, nameBox, factBox, specsBtn, refBtn;
 
-/* ---------- helpers -------------------------------------------------- */
-const colour = st => STATE_COLOUR[st] || STATE_COLOUR.unknown;
-
-function buildGrid() {
-  table.innerHTML = "";
-  // Use adult list for positions (same coords for kid)
-  ELEMENTS_ADULT.forEach(el => {
+/* ---------- grid & popup -------------------------------------------- */
+function buildGrid(){
+  grid.innerHTML = "";
+  ELEMENTS.forEach(el=>{
     const cell = document.createElement("div");
-    cell.className  = "element";
+    cell.className = "element";
     cell.textContent = el.sym;
-    cell.style.background      = colour(el.state);
+    cell.style.background = colour(el.state);
     cell.style.gridColumnStart = el.col;
-    cell.style.gridRowStart    = el.row;
+    cell.style.gridRowStart = el.row;
     cell.onclick = () => openPopup(el.sym);
-    table.appendChild(cell);
+    grid.appendChild(cell);
   });
 }
 
-function openPopup(sym) {
-  renderFacts(sym);
-  popup.style.display = "flex"; // show modal
+function openPopup(sym){
+  render(sym);
+  popup.style.display = "flex";
+  specsBtn.onclick = () => {currentView="specs";      render(sym);};
+  refBtn.onclick   = () => {currentView="reference";  render(sym);};
 }
+function closePopup(){ popup.style.display = "none"; }
 
-function renderFacts(sym) {
-  const kid  = ELEMENTS_KID.find(e => e.sym === sym);
-  const adult= ELEMENTS_ADULT.find(e => e.sym === sym);
-  symbolEl.textContent = sym;
-
-  if (mode === "kid") {
-    nameEl.textContent = kid ? kid.name : adult?.name || sym;
-    factEl.textContent = kid ? kid.fun  : "Fun fact coming soon!";
-    kidBtn.classList.add("active");
-    adultBtn.classList.remove("active");
-  } else {
-    nameEl.textContent = adult ? `${adult.name} (Atomic No. ${adult.num})` : kid?.name || sym;
-    factEl.textContent = adult ? `Standard Atomic Weight: ${adult.mass}`    : "Data coming soon.";
-    adultBtn.classList.add("active");
-    kidBtn.classList.remove("active");
+function render(sym){
+  const el = ELEMENTS.find(e=>e.sym===sym);
+  if(!el) return;
+  symbolBox.textContent = el.sym;
+  if(currentView==="specs"){
+    nameBox.textContent = `${el.name} (Atomic No. ${el.num})`;
+    factBox.textContent = `Standard Atomic Mass: ${el.mass}`;
+    specsBtn.classList.add("active");  refBtn.classList.remove("active");
+  }else{
+    nameBox.textContent = el.name;
+    factBox.textContent = el.ref;
+    refBtn.classList.add("active");    specsBtn.classList.remove("active");
   }
 }
 
-function closePopup(){ popup.style.display="none"; }
-function switchToKid(){ mode="kid";  if(symbolEl.textContent) renderFacts(symbolEl.textContent); }
-function switchToAdult(){ mode="adult";if(symbolEl.textContent) renderFacts(symbolEl.textContent); }
-
 /* ---------- init ----------------------------------------------------- */
-window.addEventListener("DOMContentLoaded", ()=>{
-  table    = document.getElementById("periodic-table");
-  popup    = document.getElementById("info-popup");
-  symbolEl = document.getElementById("element-name");
-  nameEl   = document.getElementById("element-name"); // same id alias for clarity
-  factEl   = document.getElementById("element-fact");
-  kidBtn   = document.getElementById("kidMode");
-  adultBtn = document.getElementById("adultMode");
-
+window.addEventListener("DOMContentLoaded",()=>{
+  grid       = document.getElementById("periodic-table");
+  popup      = document.getElementById("info-popup");
+  symbolBox  = document.getElementById("element-name");  // heading
+  nameBox    = document.getElementById("element-name");  // same element
+  factBox    = document.getElementById("element-fact");
+  specsBtn   = document.getElementById("specsBtn");
+  refBtn     = document.getElementById("refBtn");
   document.getElementById("close-popup").onclick = closePopup;
-  kidBtn.onclick   = switchToKid;
-  adultBtn.onclick = switchToAdult;
-  document.getElementById("toggle-mode").onclick = ()=>{
-    mode = (mode === "kid") ? "adult" : "kid";
-    // update button text
-    document.getElementById("toggle-mode").innerText = mode === "kid" ? "Switch to Adult Mode" : "Switch to Kid Mode";
-  };
-
   buildGrid();
 });
