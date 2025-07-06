@@ -2,25 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>🧪 Fun Interactive Periodic Table 🧪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fun Interactive Periodic Table</title>
+
+  <!-- Flask expands these to /static/... -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
   <h1>🧪 Fun Interactive Periodic Table 🧪</h1>
 
+  <!-- global mode switch -->
   <button id="toggle-mode">Switch to Adult Mode</button>
 
+  <!-- periodic-table grid (populated by script.js) -->
   <div id="periodic-table"></div>
 
-  <div id="info-popup" style="display:none;">
+  <!-- popup modal -->
+  <div id="info-popup">
     <div id="popup-content">
-      <button id="close-popup">X</button>
-      <h2 id="element-name">Element</h2>
-      <p id="element-fact">Fact goes here</p>
-      <button onclick="toggleMode()">Switch Mode</button>
+      <button id="close-popup">×</button>
+
+      <!-- Kid / Adult buttons inside popup -->
+      <div class="mode-switch">
+        <button id="kidMode"  class="active">Kid Facts</button>
+        <button id="adultMode">Adult Data</button>
+      </div>
+
+      <h2 id="element-name">H</h2>
+      <p id="element-fact">Fun fact goes here…</p>
     </div>
   </div>
-
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
