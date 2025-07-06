@@ -1,29 +1,117 @@
-:root{
-  --solid:#90be6d;  --liquid:#8ecae6;  --gas:#ffd93b;  --unknown:#adb5bd;
-  --border:#023047; --popup-bg:#ffffff;
+/* =======================
+   Periodic Table Styling
+   ======================= */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  text-align: center;
 }
 
-/* layout */
-body{font-family:system-ui,sans-serif;background:#f1f7ff;text-align:center;margin:0;padding:2rem 1rem;}
-h1{margin-bottom:1.4rem;font-size:2rem}
+h1 {
+  margin-top: 20px;
+  font-size: 2rem;
+}
 
-/* grid */
-#periodic-table{display:grid;grid-template-columns:repeat(18,70px);gap:6px;justify-content:center;margin-bottom:2rem}
-.element{border:2px solid var(--border);border-radius:8px;padding:1rem 0;color:#fff;font-weight:700;cursor:pointer;transition:.15s}
-.element:hover{transform:translateY(-4px);filter:brightness(1.1)}
+/* ====== Element Grid ====== */
 
-/* popup */
-#info-popup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;
-            backdrop-filter:blur(2px);background:rgba(0,0,0,.35);z-index:100}
-#popup-content{background:var(--popup-bg);border:3px solid var(--border);border-radius:16px;
-               box-shadow:0 12px 24px rgba(0,0,0,.25);width:min(90%,340px);padding:1.6rem 1.3rem 2rem;position:relative}
-#close-popup{position:absolute;top:6px;right:10px;font-size:1.4rem;border:none;background:none;cursor:pointer}
+#periodic-table {
+  display: grid;
+  grid-template-columns: repeat(18, 1fr);
+  grid-auto-rows: 60px;
+  gap: 4px;
+  padding: 20px;
+  max-width: 1080px;
+  margin: auto;
+}
 
-/* buttons inside popup */
-.mode-switch{margin-bottom:.8rem}
-.mode-switch button{margin:0 .3rem;padding:.35rem .8rem;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer}
-.mode-switch button.active{background:#ffd93b;color:#023047;font-weight:700}
+.element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background: #ccc;
+  color: #000;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
 
-/* text */
-#element-name{margin:.4rem 0 .3rem;font-size:1.3rem;font-weight:700}
-#element-fact{font-size:1.05rem;margin-bottom:1rem}
+.element:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* ====== Popup Modal ====== */
+
+#info-popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-card {
+  background: white;
+  padding: 24px;
+  width: 300px;
+  border-radius: 12px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.popup-card h2 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.popup-card p {
+  font-size: 1rem;
+  margin: 12px 0;
+}
+
+/* ====== Buttons in Popup ====== */
+
+.mode-buttons {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mode-buttons button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #e0e0e0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.mode-buttons button.active {
+  background: #90caf9;
+  color: #fff;
+}
+
+/* ====== Close Button ====== */
+
+#close-popup {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+}
+
+#close-popup:hover {
+  color: #000;
+}
