@@ -1,26 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>🧪 Fun Interactive Periodic Table 🧪</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <h1>🧪 Fun Interactive Periodic Table 🧪</h1>
+/* ---------- color tokens -------------------------------------------- */
+:root{
+  --solid:#90be6d;
+  --liquid:#8ecae6;
+  --gas:#ffd93b;
+  --unknown:#adb5bd;
+  --border:#023047;
+  --popup-bg:#ffffff;
+}
 
-  <button id="toggle-mode">Switch to Adult Mode</button>
+/* ---------- basic layout -------------------------------------------- */
+body{
+  font-family:system-ui, sans-serif;
+  background:#f1f7ff;
+  text-align:center;
+  margin:0;
+  padding:2rem 1rem;
+}
+h1{margin-bottom:1.4rem;font-size:1.9rem}
 
-  <div id="periodic-table"></div>
+/* ---------- top mode-toggle button ---------------------------------- */
+#toggle-mode{
+  padding:0.45rem 1.1rem;
+  border:2px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  cursor:pointer;
+  font-weight:600;
+  margin-bottom:1.6rem;
+}
 
-  <div id="info-popup" style="display:none;">
-    <div id="popup-content">
-      <button id="close-popup">X</button>
-      <h2 id="element-name">Element</h2>
-      <p id="element-fact">Fact goes here</p>
-      <button onclick="toggleMode()">Switch Mode</button>
-    </div>
-  </div>
+/* ---------- periodic-table grid ------------------------------------ */
+#periodic-table{
+  display:grid;
+  grid-template-columns:repeat(18,70px);
+  gap:6px;
+  justify-content:center;
+  margin:0 auto 2rem;
+}
 
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+.element{
+  border:2px solid var(--border);
+  border-radius:8px;
+  padding:1rem 0;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s;
+  text-align:center;
+}
+.element:hover{
+  transform:translateY(-4px);
+  filter:brightness(1.1);
+}
+
+/* ---------- popup modal -------------------------------------------- */
+#info-popup{
+  position:fixed;
+  inset:0;
+  display:none;                 /* shown via JS */
+  align-items:center;
+  justify-content:center;
+  backdrop-filter:blur(2px);
+  background:rgba(0,0,0,.35);
+  z-index:100;
+}
+
+#popup-content{
+  background:var(--popup-bg);
+  border:3px solid var(--border);
+  border-radius:16px;
+  box-shadow:0 12px 24px rgba(0,0,0,.25);
+  width:min(90%,340px);
+  padding:1.6rem 1.3rem 2rem;
+  position:relative;
+}
+
+#close-popup{
+  position:absolute;
+  top:6px;
+  right:10px;
+  font-size:1.4rem;
+  border:none;
+  background:none;
+  cursor:pointer;
+}
+
+/* ---------- Kid / Adult switch inside popup ------------------------ */
+.mode-switch{
+  margin-bottom:.8rem;
+}
+.mode-switch button{
+  margin:0 .3rem;
+  padding:.35rem .8rem;
+  border:1px solid var(--border);
+  border-radius:6px;
+  background:#fff;
+  cursor:pointer;
+}
+.mode-switch button.active{
+  background:#ffd93b;
+  color:#023047;
+  font-weight:700;
+}
+
+/* ---------- text inside popup -------------------------------------- */
+#element-name{
+  margin:.4rem 0 .2rem;
+  font-size:1.3rem;
+  font-weight:700;
+}
+#element-fact{
+  font-size:1.05rem;
+  margin-bottom:1rem;
+}
+
+/* ---------- color the grid cells by state -------------------------- */
+[element-state="solid"]  { background:var(--solid);  }
+[element-state="liquid"] { background:var(--liquid); }
+[element-state="gas"]    { background:var(--gas);    }
+[element-state="unknown"]{ background:var(--unknown);}
