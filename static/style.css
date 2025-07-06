@@ -29,3 +29,19 @@
     content:"";position:fixed;inset:0;background:rgba(0,0,0,.35);
     backdrop-filter:blur(2px);z-index:15
   }
+#mode-buttons{
+  margin-bottom:0.6rem;
+}
+#mode-buttons button{
+  margin:0 .3rem;
+  padding:.35rem .8rem;
+  border:1px solid #023047;
+  border-radius:6px;
+  cursor:pointer;
+  background:#fff;
+}
+#mode-buttons button.active{
+  background:#ffd93b;
+  color:#023047;
+  font-weight:700;
+}
