@@ -2,37 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🧪 Periodic Table 🧪</title>
-
-  <!-- Static assets -->
+  <title>🧪Periodic Table🧪</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
-
 <body>
-  <!-- Heading -->
   <h1>🧪Periodic Table🧪</h1>
 
-  <!-- Element grid -->
-  <div id="periodic-table"></div>
+  <div class="mode-buttons">
+    <button id="quickRefBtn" class="active">🔍 Quick Reference</button>
+    <button id="specsBtn">🧪 Atomic Specs</button>
+  </div>
 
-  <!-- Popup modal -->
-  <div id="info-popup">
-    <div class="popup-card" id="popup-content" role="dialog" aria-modal="true">
-      <!-- Close (×) -->
-      <span id="close-popup" aria-label="Close" tabindex="0">&times;</span>
+  <div id="periodic-table" class="grid"></div>
 
-      <!-- Mode-switch buttons stay on top -->
-      <div class="mode-buttons">
-        <button id="quickRefBtn" class="active">Quick Reference</button>
-        <button id="specsBtn">Atomic Specs</button>
-      </div>
-
-      <!-- Element info -->
-      <h2 id="element-name">H</h2>
-      <p id="element-fact">Lightest element; fuels stars.</p>
+  <div id="info-popup" class="popup" style="display: none;">
+    <div class="popup-card">
+      <h2 id="element-name"></h2>
+      <p id="element-fact"></p>
+      <button id="close-popup">❌</button>
     </div>
   </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
