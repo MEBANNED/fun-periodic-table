@@ -1,65 +1,59 @@
-// Get modal and related elements
-const modal       = document.getElementById('infoModal');
-const modalSymbol = document.getElementById('modalSymbol');
-const modalName   = document.getElementById('modalName');
-const quickInfo   = document.getElementById('quickInfo');
-const specsInfo   = document.getElementById('specsInfo');
-const toggleQuickBtn = document.getElementById('toggleQuick');
-const toggleSpecsBtn = document.getElementById('toggleSpecs');
-const closeBtn    = document.getElementById('closeBtn');
+const elements = [
+  { sym: "H",  name: "Hydrogen",   row: 1, col: 1,  state: "gas",   ref: "I help rockets fly! 🚀", num: 1,  mass: 1.008 },
+  { sym: "He", name: "Helium",     row: 1, col: 18, state: "gas",   ref: "I float balloons! 🎈",  num: 2,  mass: 4.0026 },
+  { sym: "Li", name: "Lithium",    row: 2, col: 1,  state: "solid", ref: "I'm in batteries! 🔋",  num: 3,  mass: 6.94 },
+  { sym: "Be", name: "Beryllium",  row: 2, col: 2,  state: "solid", ref: "I build fast planes! ✈️", num: 4, mass: 9.0122 },
+  // Add more elements here...
+];
 
-// Function to open the modal with Quick Reference content
-function openModal(element) {
-  // Get element data from clicked element’s dataset
-  const symbol    = element.id;
-  const name      = element.dataset.name;
-  const atomicNum = element.dataset.number;
-  const atomicMass= element.dataset.mass;
-  const quickText = element.dataset.quick;
-  // Populate modal fields
-  modalSymbol.textContent = symbol;
-  modalName.textContent   = name;
-  quickInfo.textContent   = quickText;
-  specsInfo.textContent   = `Atomic Number: ${atomicNum}, Atomic Mass: ${atomicMass}`;
-  // Always default to Quick Reference view on open
-  quickInfo.style.display = 'block';
-  specsInfo.style.display = 'none';
-  toggleQuickBtn.classList.add('active');
-  toggleSpecsBtn.classList.remove('active');
-  // Show the modal popup
-  modal.style.display = 'block';
+let currentMode = "quick"; // default for popup
+let currentElement = null;
+
+function buildTable() {
+  const grid = document.getElementById("periodic-table");
+  elements.forEach(el => {
+    const div = document.createElement("div");
+    div.className = "element";
+    div.textContent = el.sym;
+    div.style.gridColumnStart = el.col;
+    div.style.gridRowStart = el.row;
+    div.onclick = () => openPopup(el);
+    grid.appendChild(div);
+  });
 }
 
-// Attach click event to all element boxes
-document.querySelectorAll('.element').forEach(el => {
-  el.addEventListener('click', () => openModal(el));
-});
+function openPopup(el) {
+  currentElement = el;
+  currentMode = "quick";
+  updatePopup();
+  document.getElementById("info-popup").style.display = "flex";
+}
 
-// Toggle button event handlers
-toggleQuickBtn.addEventListener('click', () => {
-  // Show Quick Reference content, hide Atomic Specs
-  quickInfo.style.display = 'block';
-  specsInfo.style.display = 'none';
-  // Update active button style
-  toggleQuickBtn.classList.add('active');
-  toggleSpecsBtn.classList.remove('active');
-});
-toggleSpecsBtn.addEventListener('click', () => {
-  // Show Atomic Specs content, hide Quick Reference
-  quickInfo.style.display = 'none';
-  specsInfo.style.display = 'block';
-  // Update active button style
-  toggleSpecsBtn.classList.add('active');
-  toggleQuickBtn.classList.remove('active');
-});
+function closePopup() {
+  document.getElementById("info-popup").style.display = "none";
+}
 
-// Close modal when '×' button is clicked
-closeBtn.onclick = function() {
-  modal.style.display = 'none';
-};
-// Close modal if clicking outside the modal content
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = 'none';
+function toggleMode() {
+  currentMode = currentMode === "quick" ? "spec" : "quick";
+  updatePopup();
+}
+
+function updatePopup() {
+  const el = currentElement;
+  document.getElementById("element-symbol").innerText = el.sym;
+  document.getElementById("element-name").innerText = el.name;
+
+  if (currentMode === "quick") {
+    document.getElementById("element-fact").innerText = el.ref;
+    document.getElementById("toggle-mode").innerText = "Switch to Atomic Specs";
+  } else {
+    document.getElementById("element-fact").innerText = `Atomic Number: ${el.num}, Mass: ${el.mass}`;
+    document.getElementById("toggle-mode").innerText = "Switch to Quick Reference";
   }
-};
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  buildTable();
+  document.getElementById("close-popup").onclick = closePopup;
+  document.getElementById("toggle-mode").onclick = toggleMode;
+});
