@@ -1,45 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fun Periodic Table</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>🧪Periodic Table🧪</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Periodic table elements grid -->
-  <div class="periodic-table">
-    <!-- Example element entries with data attributes for name, atomic number, mass, and quick reference fact -->
-    <div class="element" id="H" data-name="Hydrogen" data-number="1" data-mass="1.008"
-         data-quick="Hydrogen is the most abundant element in the universe.">
-      <span class="number">1</span>
-      <span class="symbol">H</span>
-      <span class="name">Hydrogen</span>
-    </div>
-    <div class="element" id="He" data-name="Helium" data-number="2" data-mass="4.0026"
-         data-quick="Helium is used in balloons to make them float.">
-      <span class="number">2</span>
-      <span class="symbol">He</span>
-      <span class="name">Helium</span>
-    </div>
-    <!-- ... other elements ... -->
-  </div>
+  <h1>🧪Periodic Table🧪</h1>
+  <div id="periodic-table"></div>
 
-  <!-- Info Popup Modal -->
-  <div id="infoModal" class="modal">
-    <div class="modal-content">
-      <span id="closeBtn" class="close">&times;</span>
-      <h2 id="modalSymbol"></h2>
-      <h3 id="modalName"></h3>
-      <!-- Toggle buttons inside popup -->
-      <div id="modalToggle">
-        <button id="toggleQuick" class="toggle-btn active">Quick Reference</button>
-        <button id="toggleSpecs" class="toggle-btn">Atomic Specs</button>
-      </div>
-      <!-- Content sections for Quick Reference and Atomic Specs -->
-      <div id="modalInfo">
-        <p id="quickInfo"></p>
-        <p id="specsInfo"></p>
-      </div>
+  <div id="info-popup" class="hidden">
+    <div class="popup-card">
+      <span id="close-popup">❌</span>
+      <h2 id="element-symbol"></h2>
+      <h3 id="element-name"></h3>
+      <p id="element-fact"></p>
+      <button id="toggle-mode">Switch to Atomic Specs</button>
     </div>
   </div>
 
