@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🧪Periodic Table🧪</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>🧪Periodic Table🧪</h1>
-  <div id="periodic-table"></div>
+  <div id="periodic-table" class="grid"></div>
 
-  <div id="info-popup" class="hidden">
-    <div class="popup-card">
-      <span id="close-popup">❌</span>
-      <h2 id="element-symbol"></h2>
-      <h3 id="element-name"></h3>
-      <p id="element-fact"></p>
-      <button id="toggle-mode">Switch to Atomic Specs</button>
+  <div id="info-popup" class="popup">
+    <div class="popup-content">
+      <span id="close-popup" class="close">×</span>
+      <div id="element-name" class="element-name"></div>
+      <div id="element-fact" class="element-fact"></div>
+      <button id="toggleViewBtn">Switch to Atomic Specs</button>
     </div>
   </div>
 
