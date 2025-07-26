@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>🧪Periodic Table🧪</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🧪Periodic Table🧪</h1>
-  <div id="periodic-table" class="grid"></div>
+  <h1>🧪 Periodic Table 🧪</h1>
+  <div id="periodic-table" class="table-grid"></div>
 
   <div id="info-popup" class="popup">
-    <div class="popup-content">
-      <span id="close-popup" class="close">×</span>
-      <div id="element-name" class="element-name"></div>
-      <div id="element-fact" class="element-fact"></div>
-      <button id="toggleViewBtn">Switch to Atomic Specs</button>
+    <div class="popup-card">
+      <span id="element-name" class="popup-symbol">H</span>
+      <h2 id="element-title">Hydrogen</h2>
+      <p id="element-fact">I help rockets fly! 🚀</p>
+      <div class="popup-toggle">
+        <button id="quickRefBtn" class="active">Quick Reference</button>
+        <button id="specsBtn">Atomic Specs</button>
+      </div>
+      <button id="close-popup">Close</button>
     </div>
   </div>
 
