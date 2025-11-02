@@ -91,3 +91,27 @@ body{
 .cell[data-cat="transition-metal"]     { background:#d6e7ff; }
 .cell[data-cat="lanthanide"]           { background:#e8f7ff; }
 .cell[data-cat="actinide"]             { background:#ffe4f3; }
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell .num {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.cell .sym {
+  font-size: 18px;
+  font-weight: 900;
+  margin: 3px 0;
+}
+
+.cell .el-name {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.8;
+}
