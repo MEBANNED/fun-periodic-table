@@ -21,13 +21,13 @@ body{
 }
 
 /* grid container (reused if your page already has these) */
-.pt-grid{
-  display:grid;
-  grid-template-columns: repeat(18, var(--cell-size));
-  grid-auto-rows: var(--cell-size);
-  gap: 10px;
-  padding: 16px;
-  justify-content: start;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(18, 60px);
+  grid-template-rows: repeat(10, 60px);
+  gap: 6px;
+  justify-content: center;
+  margin: 20px auto;
 }
 
 /* element cell */
