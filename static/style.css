@@ -21,15 +21,15 @@ body{
 }
 
 /* grid container (reused if your page already has these) */
-.grid {
+.pt-grid {
   display: grid;
-  grid-template-columns: repeat(18, 60px);
-  grid-template-rows: repeat(10, 60px);
-  gap: 6px;
+  grid-template-columns: repeat(18, 70px);
+  grid-template-rows: repeat(10, 70px);
+  gap: 8px;
   justify-content: center;
-  margin: 20px auto;
+  align-content: center;
+  margin: 40px auto;
 }
-
 /* element cell */
 .cell{
   position:relative;
