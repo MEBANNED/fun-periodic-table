@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <title>🧪 Periodic Table 🧪</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
   <h1>🧪 Periodic Table 🧪</h1>
+  <p class="hint">Tap a square to learn a kid-friendly fact.</p>
 
-  <!-- Grid -->
-  <div id="periodic-table" class="table"></div>
+  <div id="periodic-table" class="grid"></div>
 
-  <!-- Popup (hidden by default) -->
+  <!-- overlay + popup (hidden at start) -->
   <div id="overlay" class="hidden"></div>
   <div id="popup" class="popup hidden" role="dialog" aria-modal="true">
     <button id="close" class="close" aria-label="Close">×</button>
@@ -24,14 +25,7 @@
       </div>
     </div>
 
-    <div id="content" class="content">
-      <!-- Quick Reference text goes here by default -->
-    </div>
-
-    <div class="toggle-row">
-      <button id="btnQuick" class="toggle active" type="button">Quick Reference</button>
-      <button id="btnSpecs" class="toggle" type="button">Atomic Specs</button>
-    </div>
+    <div id="content" class="content">I help rockets fly! 🚀</div>
   </div>
 </body>
 </html>
