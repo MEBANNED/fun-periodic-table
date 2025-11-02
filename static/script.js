@@ -1,11 +1,3 @@
-/* Periodic Table UI — minimal, layout-only rewrite
-   - Puts atomic number at the top of the cell
-   - Moves the symbol slightly down
-   - Keeps your existing popup behavior (if present)
-   - Forces US spelling: "Aluminum" instead of "Aluminium"
-*/
-
-/* === Helpers =========================================================== */
 
 // If your project already defines ELEMENTS, we reuse it.
 // Otherwise, we fall back to a tiny sample so the page won't break locally.
@@ -34,38 +26,33 @@ function colourKey(cat="") { return (cat || "").toLowerCase().replace(/\s+/g, "-
 
 /* === Cell builder ===================================================== */
 
-function makeCell(e) {
+function makeCell(e){
   const cell = document.createElement("div");
   cell.className = "cell";
   cell.style.gridColumnStart = e.xpos;
   cell.style.gridRowStart = e.ypos;
-  cell.dataset.cat = colourKey(e.category);
-  cell.title = e.name || e.symbol || "";
+  cell.dataset.cat = (e.category || "").toLowerCase();
 
-  // atomic number (top, centered)
+  // --- top atomic number ---
   const num = document.createElement("div");
   num.className = "num";
-  num.textContent = (e.number ?? "") + "";
+  num.textContent = e.number;
+  cell.appendChild(num);
 
-  // symbol (nudged downward)
+  // --- middle symbol ---
   const sym = document.createElement("div");
   sym.className = "sym";
-  sym.textContent = e.symbol || "";
-
-  // (optional) short name line, if you keep it in your design
-  const nm = document.createElement("div");
-  nm.className = "el-name";
-  nm.textContent = e.name || "";
-
-  cell.appendChild(num);
+  sym.textContent = e.symbol;
   cell.appendChild(sym);
-  cell.appendChild(nm);
 
-  // Keep your existing popup handler if present
-  if (typeof openPopup === "function") {
-    cell.addEventListener("click", () => openPopup(e));
-  }
+  // --- bottom name ---
+  const name = document.createElement("div");
+  name.className = "el-name";
+  name.textContent = (e.name && e.name.trim().toLowerCase() === "aluminium") 
+    ? "Aluminum" : e.name;
+  cell.appendChild(name);
 
+  cell.addEventListener("click", () => openPopup(e));
   return cell;
 }
 
