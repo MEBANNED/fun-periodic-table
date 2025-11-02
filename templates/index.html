@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -9,6 +10,17 @@
 </head>
 <body>
   <h1>🧪 Periodic Table 🧪</h1>
+  <!-- Periodic Table grid container -->
+<div class="pt-grid" id="ptGrid">
+  <!-- Quick test cell so you can confirm the layout is working -->
+  <button class="cell" style="grid-column: 1; grid-row: 1;">
+    <div class="num">1</div>
+    <div class="sym">H</div>
+    <div class="el-name">Hydrogen</div>
+  </button>
+
+  <!-- Add more cells or let your JS populate them into #ptGrid -->
+</div>
   <p class="hint">Tap a square to learn a kid-friendly fact.</p>
 
   <div id="periodic-table" class="grid"></div>
