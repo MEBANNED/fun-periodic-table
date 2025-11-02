@@ -2,27 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🧪Periodic Table🧪</title>
+  <title>🧪 Periodic Table 🧪</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <h1>🧪 Periodic Table 🧪</h1>
-  <div id="periodic-table" class="table-grid"></div>
 
-  <div id="info-popup" class="popup">
-    <div class="popup-card">
-      <span id="element-name" class="popup-symbol">H</span>
-      <h2 id="element-title">Hydrogen</h2>
-      <p id="element-fact">I help rockets fly! 🚀</p>
-      <div class="popup-toggle">
-        <button id="quickRefBtn" class="active">Quick Reference</button>
-        <button id="specsBtn">Atomic Specs</button>
+  <!-- Grid -->
+  <div id="periodic-table" class="table"></div>
+
+  <!-- Popup (hidden by default) -->
+  <div id="overlay" class="hidden"></div>
+  <div id="popup" class="popup hidden" role="dialog" aria-modal="true">
+    <button id="close" class="close" aria-label="Close">×</button>
+
+    <div class="popup-header">
+      <div id="symbol" class="symbol">H</div>
+      <div class="title">
+        <div id="name" class="name">Hydrogen</div>
       </div>
-      <button id="close-popup">Close</button>
+    </div>
+
+    <div id="content" class="content">
+      <!-- Quick Reference text goes here by default -->
+    </div>
+
+    <div class="toggle-row">
+      <button id="btnQuick" class="toggle active" type="button">Quick Reference</button>
+      <button id="btnSpecs" class="toggle" type="button">Atomic Specs</button>
     </div>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
