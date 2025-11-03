@@ -21,14 +21,13 @@ body{
 }
 
 /* grid container (reused if your page already has these) */
-.pt-grid {
+.pt-grid{
   display: grid;
-  grid-template-columns: repeat(18, 70px);
-  grid-template-rows: repeat(10, 70px);
-  gap: 8px;
-  justify-content: center;
-  align-content: center;
-  margin: 40px auto;
+  grid-template-columns: repeat(18, var(--cell)); /* 18 columns like the real table */
+  grid-auto-rows: var(--cell);
+  gap: var(--gap);
+  justify-content: center;  /* center the grid itself */
+  width: max-content;       /* prevent grid from shrinking */
 }
 /* element cell */
 .cell{
@@ -81,7 +80,7 @@ body{
   pointer-events:none;
 }
 
-/* example colour mapping by category (kept simple; you may already have yours) */
+/* example color mapping by category (kept simple; you may already have yours) */
 .cell[data-cat="noble-gas"]            { background:#f3ccff; }
 .cell[data-cat="nonmetal"]             { background:#fff1a8; }
 .cell[data-cat="alkali-metal"]         { background:#ffd3d3; }
