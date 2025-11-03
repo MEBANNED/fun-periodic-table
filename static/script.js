@@ -29,10 +29,38 @@ function colourKey(cat="") { return (cat || "").toLowerCase().replace(/\s+/g, "-
 function makeCell(e){
   const cell = document.createElement("div");
   cell.className = "cell";
+
+  // keep your existing grid placement
   cell.style.gridColumnStart = e.xpos;
-  cell.style.gridRowStart = e.ypos;
+  cell.style.gridRowStart    = e.ypos;
+
+  // keep your existing category data
   cell.dataset.cat = (e.category || "").toLowerCase();
 
+  // tolerate either {num|number}, {sym|symbol}, {name}
+  const num = (e.num != null ? e.num : e.number);
+  const sym = (e.sym || e.symbol || "");
+  const nameRaw = (e.name || "");
+  const name = nameRaw.trim().toLowerCase() === "aluminium" ? "Aluminum" : nameRaw;
+
+  // ✨ stack = number (top), symbol (middle), name (bottom)
+  cell.innerHTML = `
+    <div class="num">${num ?? ""}</div>
+    <div class="sym">${sym}</div>
+    <div class="el-name">${name}</div>
+  `;
+
+  // optional: tooltip + a11y label (harmless if you already have others)
+  cell.title = `${num ?? ""} ${name} (${sym})`.trim();
+  cell.setAttribute("aria-label", cell.title);
+
+  // if you already attach clicks elsewhere, this won’t interfere.
+  if (typeof openPopup === "function") {
+    cell.addEventListener("click", () => openPopup(e));
+  }
+
+  return cell;
+}
   // --- top atomic number ---
   const num = document.createElement("div");
   num.className = "num";
