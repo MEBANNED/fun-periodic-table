@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fun Periodic Table</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Only keep ONE title -->
   <h1>🧪 Fun Periodic Table 🧪</h1>
 
-  <!-- Info about tapping a square -->
   <p>Tap a square to learn a kid-friendly fact.</p>
 
-  <!-- Container for the periodic table -->
   <div id="periodic-table"></div>
 
-  <!-- Container for the element card -->
-  <div id="element-card"></div>
+  <div id="element-card" class="hidden">
+    <button onclick="closeCard()">×</button>
+    <div id="element-symbol"></div>
+    <div id="element-name"></div>
+    <div id="element-fact"></div>
+  </div>
 
-  <!-- Your JavaScript file -->
   <script src="script.js"></script>
 </body>
 </html>
