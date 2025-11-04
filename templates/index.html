@@ -1,38 +1,25 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>🧪 Children Periodic Table 🧪</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fun Periodic Table</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Only keep ONE title -->
   <h1>🧪 Fun Periodic Table 🧪</h1>
- <div class="app">
-  <h1>🧪 Periodic Table 🧪</h1>
-  <div id="ptGrid" class="pt-grid"></div>
-</div>
-  <!-- Add more cells or let your JS populate them into #ptGrid -->
-</div>
-  <p class="hint">Tap a square to learn a kid-friendly fact.</p>
 
-  <div id="periodic-table" class="grid"></div>
+  <!-- Info about tapping a square -->
+  <p>Tap a square to learn a kid-friendly fact.</p>
 
-  <!-- overlay + popup (hidden at start) -->
-  <div id="overlay" class="hidden"></div>
-  <div id="popup" class="popup hidden" role="dialog" aria-modal="true">
-    <button id="close" class="close" aria-label="Close">×</button>
+  <!-- Container for the periodic table -->
+  <div id="periodic-table"></div>
 
-    <div class="popup-header">
-      <div id="symbol" class="symbol">H</div>
-      <div class="title">
-        <div id="name" class="name">Hydrogen</div>
-      </div>
-    </div>
+  <!-- Container for the element card -->
+  <div id="element-card"></div>
 
-    <div id="content" class="content">I help rockets fly! 🚀</div>
-  </div>
+  <!-- Your JavaScript file -->
+  <script src="script.js"></script>
 </body>
 </html>
