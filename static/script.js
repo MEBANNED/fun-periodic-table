@@ -51,4 +51,31 @@ function renderGrid() {
   data.forEach(e => grid.appendChild(makeCell(e)));
 }
 
+// === START OF NEW CODE TO ADD ===
+
+function openPopup(elementData) {
+  const elementCard = byId("element-card");
+  if (!elementCard) {
+    console.error("Element card not found!");
+    return;
+  }
+
+  // Remove the 'hidden' class to make the card visible
+  elementCard.classList.remove("hidden");
+
+  // Populate the card with the element's data
+  byId("element-symbol").textContent = elementData.symbol;
+  byId("element-name").textContent = elementData.name;
+  byId("element-fact").textContent = elementData.desc || "No fact available.";
+}
+
+function closeCard() {
+  const elementCard = byId("element-card");
+  if (elementCard) {
+    elementCard.classList.add("hidden"); // Add the 'hidden' class to hide the card
+  }
+}
+
+// === END OF NEW CODE TO ADD ===
+
 window.addEventListener("DOMContentLoaded", renderGrid);
