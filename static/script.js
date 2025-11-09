@@ -1,5 +1,3 @@
-// If your project already defines ELEMENTS, we reuse it.
-// Otherwise, we fall back to a tiny sample so the page won't break locally.
 const SAMPLE_ELEMENTS = [
   { number: 1,  symbol: "H",  name: "Hydrogen",   category: "nonmetal",       xpos: 1,  ypos: 1, desc: "I help rockets fly! 🚀" },
   { number: 2,  symbol: "He", name: "Helium",     category: "noble gas",      xpos: 18, ypos: 1, desc: "I float balloons! 🎈" },
