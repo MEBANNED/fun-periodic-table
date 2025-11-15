@@ -1,31 +1,29 @@
-    <!DOCTYPE HTML>
-    <html lang="en-US">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Fun Periodic Table</title>
-      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-      <!-- **MAKE SURE THIS SCRIPT TAG IS GONE IF IT'S IN YOUR <HEAD> SECTION** -->
-      <!-- For example, if you had: <script src="{{ url_for('static', filename='script.js') }}"></script> -- DELETE IT -->
-      <style>
-        body {
-          font-family: system-ui;
-        }
-      </style>
-    </head>
-    <body>
-      <h1>🧪 Fun Periodic Table 🧪</h1>
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fun Periodic Table</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body {
+      font-family: system-ui;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Fun Periodic Table 🧪</h1>
 
-      <p>Tap a square to learn a fact.</p>
+  <p>Tap a square to learn a fact.</p>
 
-      <div id="periodic-table"></div>
+  <div id="periodic-table"></div>
 
-      <div id="element-card" class="hidden">
-        <button onclick="closeCard()">×</button>
-        <div id="element-symbol"></div>
-        <div id="element-name"></div>
-        <div id="element-fact"></div>
-      </div>
-    </body>
-    </html>
-    
+  <div id="element-card" class="hidden">
+    <button onclick="closeCard()">×</button>
+    <div id="element-symbol"></div>
+    <div id="element-name"></div>
+    <div id="element-fact"></div>
+  </div>
+  <script src="/static/script.js"></script>
+</body>
+</html>
