@@ -5,7 +5,7 @@
 */
 
 :root{
-  --cell-size: 15px; /* <--- CHANGED THIS VALUE TO MAKE SQUARES BIGGER */
+  --cell-size: 17px; /* <--- CHANGED THIS VALUE TO MAKE SQUARES BIGGER */
   --cell-radius: 10px;
   --cell-border: 3px;
   --fg: #152238;
