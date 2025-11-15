@@ -12,7 +12,7 @@
   --border: #243b6b;
   --bg: #ffffff;
 
-  /* --- ADDED THESE TWO LINES TO FIX THE LAYOUT --- */
+  /* --- DEFINED THESE TO FIX THE GRID LAYOUT --- */
   --cell: var(--cell-size); /* This makes --cell use the --cell-size value */
   --gap: 5px; /* This sets the space between your elements */
   /* ----------------------------------------------- */
@@ -25,30 +25,33 @@ body{
   background:var(--bg);
 }
 
-/* --- ADDED THIS TO CENTER THE TITLE --- */
+/* --- Centering the heading and paragraph, and the overall grid --- */
 h1 {
   text-align: center;
-  margin-top: 20px; /* Added some top margin for better spacing */
-  margin-bottom: 10px; /* Added some bottom margin */
+  width: 100%; /* Ensure h1 takes full width for centering */
+  margin-top: 20px; /* Space above title */
+  margin-bottom: 10px; /* Space below title */
+  box-sizing: border-box; /* Include padding/border in width calculation */
 }
 
-p { /* Centering the paragraph text as well */
+p {
   text-align: center;
-  margin-bottom: 20px;
+  width: 100%; /* Ensure p takes full width for centering */
+  margin-bottom: 20px; /* Space below paragraph */
+  box-sizing: border-box; /* Include padding/border in width calculation */
 }
-/* -------------------------------------- */
 
-
-/* grid container (reused if your page already has these) */
 .pt-grid{
   display: grid;
   grid-template-columns: repeat(18, var(--cell)); /* 18 columns like the real table */
   grid-auto-rows: var(--cell);
   gap: var(--gap);
-  justify-content: center;  /* center the grid itself */
+  justify-content: center;  /* center the grid items within the container */
   width: max-content;       /* prevent grid from shrinking */
-  margin: 0 auto;           /* Center the grid container itself */
+  margin: 0 auto;           /* Centers the entire grid container on the page */
 }
+/* ----------------------------------------------------------------- */
+
 /* element cell */
 .cell{
   position:relative;
@@ -185,4 +188,3 @@ p { /* Centering the paragraph text as well */
   color: #555;
   line-height: 1.4;
 }
-
