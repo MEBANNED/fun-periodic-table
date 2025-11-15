@@ -1,4 +1,4 @@
-# 🌟 Fun Periodic Table for Kids — Long Description
+# 🌟 Fun Periodic Table for Kids
 
 Welcome to the **Fun Periodic Table for Kids**, an interactive, colorful, and wonderfully playful way for children to explore the world of elements! Instead of a serious adult-style chart, this version turns each element into a tiny character with a personality, a fun fact, and a story to tell.
 
