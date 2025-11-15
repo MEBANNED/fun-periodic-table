@@ -11,6 +11,11 @@
   --fg: #152238;
   --border: #243b6b;
   --bg: #ffffff;
+
+  /* --- ADDED THESE TWO LINES TO FIX THE LAYOUT --- */
+  --cell: var(--cell-size); /* This makes --cell use the --cell-size value */
+  --gap: 5px; /* This sets the space between your elements */
+  /* ----------------------------------------------- */
 }
 
 body{
@@ -32,17 +37,20 @@ body{
 /* element cell */
 .cell{
   position:relative;
-  width: var(--cell-size);
-  height: var(--cell-size);
-  border: var(--cell-border) solid var(--border);
-  border-radius: var(--cell-radius);
+  width: var(--cell-size); /* Ensure it always uses the consistent cell size */
+  height: var(--cell-size); /* Ensure it always uses the consistent cell size */
+  border: var(--cell-border) solid var(--border); /* Use root variable for border */
+  border-radius: var(--cell-radius); /* Use root variable for border-radius */
   background:#eed4ff;              /* default fallback */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-sizing:border-box;
+  box-sizing:border-box; /* Ensures padding and border are included in width/height */
   cursor:pointer;
   transition: transform .1s ease;
+
+  /* Flexbox properties for content inside the cell */
+  display:flex;
+  flex-direction: column; /* Stacks symbol, number, and name vertically */
+  align-items:center; /* Centers content horizontally */
+  justify-content:center; /* Centers content vertically */
 }
 .cell:active{ transform: scale(.98); }
 
@@ -90,31 +98,24 @@ body{
 .cell[data-cat="transition-metal"]     { background:#d6e7ff; }
 .cell[data-cat="lanthanide"]           { background:#e8f7ff; }
 .cell[data-cat="actinide"]             { background:#ffe4f3; }
-.cell{
-  width: var(--cell);
-  height: var(--cell);
-  border-radius: 10px;
-  border: 3px solid #2e2a63;
-  background: #f4e0ff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
-.cell .num {
+/* The previous overrides for .cell properties like border and background are now handled within the main .cell block.
+   If you specifically want a different default border/background for ALL cells, you can adjust the main .cell block.
+   The category styles will then override the background as needed.
+*/
+.cell .num { /* This specific rule for .num is fine as it targets a child element */
   font-size: 12px;
   font-weight: 700;
   opacity: 0.9;
 }
 
-.cell .sym {
+.cell .sym { /* This specific rule for .sym is fine as it targets a child element */
   font-size: 18px;
   font-weight: 900;
   margin: 3px 0;
 }
 
-.cell .el-name {
+.cell .el-name { /* This specific rule for .el-name is fine as it targets a child element */
   font-size: 11px;
   font-weight: 600;
   opacity: 0.8;
