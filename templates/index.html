@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fun Periodic Table</title>
   <link rel="stylesheet" href="/static/style.css">
+  <!-- The comment below is just a note; keep the script tag for script.js later in the body -->
   <!-- **MAKE SURE THIS SCRIPT TAG IS GONE IF IT'S IN YOUR <HEAD> SECTION** -->
   <!-- For example, if you had: <script src="/static/script.js"></script> -- DELETE IT -->
+  <!-- The <style> tag below is fine for body font, but main styles are in style.css -->
   <style>
     body {
       font-family: system-ui;
@@ -18,16 +20,21 @@
 
   <p>Tap a square to learn a fact.</p>
 
+  <!-- This is the container where your script.js will build the periodic table -->
   <div id="periodic-table"></div>
 
+  <!-- This is the popup card for element facts, initially hidden -->
   <div id="element-card" class="hidden">
+    <!-- The onclick="closeCard()" here needs closeCard() to be available globally from script.js -->
     <button onclick="closeCard()">×</button>
     <div id="element-symbol"></div>
     <div id="element-name"></div>
     <div id="element-fact"></div>
   </div>
 
-  <!-- IMPORTANT: This line is added to load your JavaScript file -->
+  <!-- IMPORTANT: This line loads your JavaScript file.
+       It must be here, just before the closing </body> tag, so the HTML elements
+       it needs to work with (like #periodic-table) are already loaded. -->
   <script src="/static/script.js"></script>
 </body>
 </html>
