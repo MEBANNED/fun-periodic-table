@@ -45,7 +45,6 @@ Children can explore the table in fun and flexible ways:
 
 - **Element Explorer Mode:** Tap any tile to reveal a surprise.  
 - **Pattern Spotting:** Notice why similar colors cluster together.  
-- **Mini-Challenges:** “Find three elements in fireworks!”  
 - **Homework Helper:** Quickly open the card for elements they’re studying.
 
 Over time, they build a natural, intuitive understanding of how the table works—without flashcards or memorizing.
