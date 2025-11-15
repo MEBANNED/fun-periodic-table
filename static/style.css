@@ -25,6 +25,20 @@ body{
   background:var(--bg);
 }
 
+/* --- ADDED THIS TO CENTER THE TITLE --- */
+h1 {
+  text-align: center;
+  margin-top: 20px; /* Added some top margin for better spacing */
+  margin-bottom: 10px; /* Added some bottom margin */
+}
+
+p { /* Centering the paragraph text as well */
+  text-align: center;
+  margin-bottom: 20px;
+}
+/* -------------------------------------- */
+
+
 /* grid container (reused if your page already has these) */
 .pt-grid{
   display: grid;
@@ -33,6 +47,7 @@ body{
   gap: var(--gap);
   justify-content: center;  /* center the grid itself */
   width: max-content;       /* prevent grid from shrinking */
+  margin: 0 auto;           /* Center the grid container itself */
 }
 /* element cell */
 .cell{
@@ -99,24 +114,75 @@ body{
 .cell[data-cat="lanthanide"]           { background:#e8f7ff; }
 .cell[data-cat="actinide"]             { background:#ffe4f3; }
 
-/* The previous overrides for .cell properties like border and background are now handled within the main .cell block.
-   If you specifically want a different default border/background for ALL cells, you can adjust the main .cell block.
-   The category styles will then override the background as needed.
-*/
-.cell .num { /* This specific rule for .num is fine as it targets a child element */
+/* Styles for specific child elements within a cell */
+.cell .num {
   font-size: 12px;
   font-weight: 700;
   opacity: 0.9;
 }
 
-.cell .sym { /* This specific rule for .sym is fine as it targets a child element */
+.cell .sym {
   font-size: 18px;
   font-weight: 900;
   margin: 3px 0;
 }
 
-.cell .el-name { /* This specific rule for .el-name is fine as it targets a child element */
+.cell .el-name {
   font-size: 11px;
   font-weight: 600;
   opacity: 0.8;
 }
+
+/* Element Card styles (for the popup) */
+#element-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 3px solid var(--border);
+  border-radius: var(--cell-radius);
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+  text-align: center;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#element-card.hidden {
+  display: none;
+}
+
+#element-card button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px 10px;
+  color: var(--fg);
+}
+
+#element-card #element-symbol {
+  font-size: 3em;
+  font-weight: 800;
+  color: var(--fg);
+}
+
+#element-card #element-name {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+#element-card #element-fact {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.4;
+}
+
