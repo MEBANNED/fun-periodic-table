@@ -1,11 +1,5 @@
-/* Periodic Table UI — layout-only adjustments
-   - Atomic number small & centered at the top
-   - Symbol moved downward slightly
-   - Everything else left alone
-*/
-
 :root{
-  --cell-size: 70px; /* <--- CHANGED THIS VALUE TO MAKE SQUARES BIGGER */
+  --cell-size: 70px;
   --cell-radius: 10px;
   --cell-border: 3px;
   --fg: #152238;
