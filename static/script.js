@@ -1,5 +1,5 @@
 // --- ELEMENTS DATA ---
-// This array contains data for all 118 elements with their properties and your fun facts.
+// This array contains data for all 118 elements with their properties and my fun facts.
 const ELEMENTS = [
     { number: 1, symbol: "H", name: "Hydrogen", category: "nonmetal", xpos: 1, ypos: 1, desc: "The universe’s first ingredient ⭐" },
     { number: 2, symbol: "He", name: "Helium", category: "noble-gas", xpos: 18, ypos: 1, desc: "Makes balloons float and voices squeaky 🎈" },
