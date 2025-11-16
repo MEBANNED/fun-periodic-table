@@ -5,11 +5,8 @@
   --fg: #152238;
   --border: #243b6b;
   --bg: #ffffff;
-
-  /* --- DEFINED THESE TO FIX THE GRID LAYOUT --- */
-  --cell: var(--cell-size); /* This makes --cell use the --cell-size value */
-  --gap: 5px; /* This sets the space between your elements */
-  /* ----------------------------------------------- */
+  --cell: var(--cell-size);
+  --gap: 5px;
 }
 
 body{
@@ -18,14 +15,12 @@ body{
   color:var(--fg);
   background:var(--bg);
 }
-
-/* --- Centering the heading and paragraph, and the overall grid --- */
 h1 {
   text-align: center;
-  width: 100%; /* Ensure h1 takes full width for centering */
-  margin-top: 20px; /* Space above title */
-  margin-bottom: 10px; /* Space below title */
-  box-sizing: border-box; /* Include padding/border in width calculation */
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 p {
@@ -191,3 +186,6 @@ p {
   line-height: 1.4;
 }
 
+body{
+  font-family: system-ui
+}
