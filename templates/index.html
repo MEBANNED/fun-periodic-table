@@ -4,37 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fun Periodic Table</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
-  <!-- The comment below is just a note; keep the script tag for script.js later in the body -->
-  <!-- **MAKE SURE THIS SCRIPT TAG IS GONE IF IT'S IN YOUR <HEAD> SECTION** -->
-  <!-- For example, if you had: <script src="/static/script.js"></script> -- DELETE IT -->
-  <!-- The <style> tag below is fine for body font, but main styles are in style.css -->
-  <style>
-    body {
-      font-family: system-ui;
-    }
-  </style>
 </head>
 <body>
   <h1>🧪 Fun Periodic Table 🧪</h1>
 
-  <p>Tap a square to learn a fact.</p>
+  <div id="controls">
+    <button onclick="startQuiz()" class="btn game-btn">🎮 Start Quiz</button>
+    <button onclick="resetView()" class="btn reset-btn">🔄 Reset</button>
+  </div>
+  
+  <div id="quiz-display" class="hidden">
+    <p id="quiz-question">Find the element that...</p>
+    <div id="quiz-feedback"></div>
+  </div>
 
-  <!-- This is the container where your script.js will build the periodic table -->
-  <div id="periodic-table"></div>
+  <div id="filters">
+    </div>
 
-  <!-- This is the popup card for element facts, initially hidden -->
+  <p class="instruction">Tap a square to learn a fact!</p>
+
+  <div id="periodic-table-container">
+    <div id="periodic-table"></div>
+  </div>
+
   <div id="element-card" class="hidden">
-    <!-- The onclick="closeCard()" here needs closeCard() to be available globally from script.js -->
     <button onclick="closeCard()">×</button>
     <div id="element-symbol"></div>
     <div id="element-name"></div>
     <div id="element-fact"></div>
   </div>
 
-  <!-- IMPORTANT: This line loads your JavaScript file.
-       It must be here, just before the closing </body> tag, so the HTML elements
-       it needs to work with (like #periodic-table) are already loaded. -->
   <script src="/static/script.js"></script>
 </body>
 </html>
