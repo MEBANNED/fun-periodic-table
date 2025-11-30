@@ -1,191 +1,164 @@
 :root{
   --cell-size: 70px;
-  --cell-radius: 10px;
+  --cell-radius: 12px;
   --cell-border: 3px;
-  --fg: #152238;
-  --border: #243b6b;
-  --bg: #ffffff;
-  --cell: var(--cell-size);
-  --gap: 5px;
+  --fg: #2c3e50;
+  --bg: #f0f4f8;
+  --gap: 6px;
+  --font-main: 'Fredoka', sans-serif; /* New Font */
 }
 
 body{
   margin:0;
-  font-family: system-ui;
+  font-family: var(--font-main);
   color:var(--fg);
   background:var(--bg);
-}
-h1 {
-  text-align: center;
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
+  padding-bottom: 50px;
 }
 
-p {
+h1 {
   text-align: center;
-  width: 100%; /* Ensure p takes full width for centering */
-  margin-bottom: 20px; /* Space below paragraph */
-  box-sizing: border-box; /* Include padding/border in width calculation */
+  margin-top: 20px;
+  font-size: 2.5rem;
+  color: #34495e;
+}
+
+/* Controls and Filters Styling */
+#controls, #filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px auto;
+  max-width: 90%;
+}
+
+.btn {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
+  font-size: 1rem;
+}
+
+.btn:active { transform: scale(0.95); }
+.game-btn { background-color: #ff6b6b; color: white; box-shadow: 0 4px 0 #c0392b; }
+.reset-btn { background-color: #95a5a6; color: white; box-shadow: 0 4px 0 #7f8c8d; }
+
+.filter-btn {
+  background-color: #fff;
+  border: 2px solid #bdc3c7;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  box-shadow: 0 3px 0 #bdc3c7;
+}
+
+.filter-btn:hover { filter: brightness(0.95); }
+.filter-btn.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #2980b9;
+  box-shadow: 0 3px 0 #2980b9;
+}
+
+/* Quiz Display */
+#quiz-display {
+  text-align: center;
+  background: #fff;
+  border: 3px dashed #ff6b6b;
+  width: 80%;
+  max-width: 500px;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 15px;
+}
+#quiz-display.hidden { display: none; }
+#quiz-question { font-size: 1.2rem; font-weight: bold; margin: 0; }
+#quiz-feedback { margin-top: 5px; font-weight: 800; font-size: 1.2rem; }
+
+/* The Grid Container - Handling Overflow for Mobile */
+#periodic-table-container {
+  width: 100%;
+  overflow-x: auto; /* Allows side scrolling on phones */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .pt-grid{
   display: grid;
-  grid-template-columns: repeat(18, var(--cell)); /* 18 columns like the real table */
-  grid-auto-rows: var(--cell);
+  grid-template-columns: repeat(18, var(--cell-size));
+  grid-auto-rows: var(--cell-size);
   gap: var(--gap);
-  justify-content: center;  /* center the grid items within the container */
-  width: max-content;       /* prevent grid from shrinking */
-  margin: 0 auto;           /* Centers the entire grid container on the page */
+  width: max-content;
+  margin: 0 auto;
 }
-/* ----------------------------------------------------------------- */
 
-/* element cell */
+/* Element Cell Updates */
 .cell{
   position:relative;
-  width: var(--cell-size); /* Ensure it always uses the consistent cell size */
-  height: var(--cell-size); /* Ensure it always uses the consistent cell size */
-  border: var(--cell-border) solid var(--border); /* Use root variable for border */
-  border-radius: var(--cell-radius); /* Use root variable for border-radius */
-  background:#eed4ff;              /* default fallback */
-  box-sizing:border-box; /* Ensures padding and border are included in width/height */
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: var(--cell-border) solid rgba(0,0,0,0.1);
+  border-radius: var(--cell-radius);
+  background:#fff;
   cursor:pointer;
-  transition: transform .1s ease;
-
-  /* Flexbox properties for content inside the cell */
+  transition: all 0.2s ease;
   display:flex;
-  flex-direction: column; /* Stacks symbol, number, and name vertically */
-  align-items:center; /* Centers content horizontally */
-  justify-content:center; /* Centers content vertically */
-}
-.cell:active{ transform: scale(.98); }
-
-/* atomic number (top center) */
-.cell .num{
-  position:absolute;
-  top:6px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:12px;
-  line-height:1;
-  font-weight:700;
-  opacity:.9;
-  pointer-events:none;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
 }
 
-/* symbol (moved down so number fits above) */
-.cell .sym{
-  margin-top: 18px;   /* nudges the symbol down */
-  font-size: 22px;
-  font-weight: 800;
-  text-align:center;
+.cell:hover {
+  transform: translateY(-5px);
+  z-index: 10;
+  box-shadow: 0 8px 0 rgba(0,0,0,0.15);
 }
 
-/* optional element name (small, under symbol) */
-.cell .el-name{
-  position:absolute;
-  bottom:6px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size: 7px;
-  line-height:1;
-  opacity:.85;
-  text-align:center;
-  pointer-events:none;
-}
-
-/* example color mapping by category (kept simple; you may already have yours) */
-.cell[data-cat="noble-gas"]            { background:#f3ccff; }
-.cell[data-cat="nonmetal"]             { background:#fff1a8; }
-.cell[data-cat="alkali-metal"]         { background:#ffd3d3; }
-.cell[data-cat="alkaline-earth-metal"] { background:#ffe9c6; }
-.cell[data-cat="metalloid"]            { background:#dfffd8; }
-.cell[data-cat="post-transition-metal"]{ background:#d7f1ff; }
-.cell[data-cat="transition-metal"]     { background:#d6e7ff; }
-.cell[data-cat="lanthanide"]           { background:#e8f7ff; }
-.cell[data-cat="actinide"]             { background:#ffe4f3; }
-
-/* Styles for specific child elements within a cell */
-.cell .num {
-  font-size: 12px;
-  font-weight: 700;
-  opacity: 0.9;
-}
-
-.cell .sym {
-  font-size: 18px;
-  font-weight: 900;
-  margin: 3px 0;
-}
-.cell .el-name {
-  position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: clamp(5px, 1.2vw, 9px);
-  width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-sizing: border-box;
-  line-height: 1;
-  opacity: 0.85;
-  text-align: center;
+/* Dimmed state for filtering */
+.cell.dimmed {
+  opacity: 0.2;
+  transform: scale(0.9);
+  filter: grayscale(100%);
   pointer-events: none;
 }
+
+/* Colors - a bit more vivid */
+.cell[data-cat="noble-gas"]            { background:#e056fd; color: white; }
+.cell[data-cat="nonmetal"]             { background:#f1c40f; color: #444; }
+.cell[data-cat="alkali-metal"]         { background:#e74c3c; color: white; }
+.cell[data-cat="alkaline-earth-metal"] { background:#e67e22; color: white; }
+.cell[data-cat="metalloid"]            { background:#2ecc71; color: white; }
+.cell[data-cat="post-transition-metal"]{ background:#3498db; color: white; }
+.cell[data-cat="transition-metal"]     { background:#9b59b6; color: white; }
+.cell[data-cat="lanthanide"]           { background:#1abc9c; color: white; }
+.cell[data-cat="actinide"]             { background:#ff9ff3; color: white; }
+
+/* Typography inside cell */
+.cell .num{ position:absolute; top:4px; font-size:10px; opacity:0.8; }
+.cell .sym{ font-size: 24px; font-weight: 700; margin-top: 8px; text-shadow: 1px 1px 0 rgba(0,0,0,0.1); }
+.cell .el-name{ position: absolute; bottom: 5px; font-size: 8px; width: 90%; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Popup Card */
 #element-card {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  border: 3px solid var(--border);
-  border-radius: var(--cell-radius);
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  border: 4px solid #34495e;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   z-index: 1000;
   text-align: center;
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  max-width: 320px;
+  width: 90%;
+  font-family: var(--font-main);
 }
 
-#element-card.hidden {
-  display: none;
-}
-
-#element-card button {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 5px 10px;
-  color: var(--fg);
-}
-
-#element-card #element-symbol {
-  font-size: 3em;
-  font-weight: 800;
-  color: var(--fg);
-}
-
-#element-card #element-name {
-  font-size: 1.5em;
-  font-weight: 600;
-  color: var(--fg);
-}
-
-#element-card #element-fact {
-  font-size: 1em;
-  color: #555;
-  line-height: 1.4;
-}
-
-body{
-  font-family: system-ui
-}
+#element-card.hidden { display: none; }
+#element-card button { position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; font-weight: bold; cursor: pointer; }
